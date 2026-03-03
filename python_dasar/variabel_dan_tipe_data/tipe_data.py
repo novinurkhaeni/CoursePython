@@ -56,3 +56,4 @@ is_married = False
 has_license = True
 
 print(type(is_married)) #<class 'bool'>
+print(puisi)
