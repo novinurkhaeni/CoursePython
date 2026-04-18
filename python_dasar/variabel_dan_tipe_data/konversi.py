@@ -1,3 +1,8 @@
+#● int(), mengubah string atau data lain menjadi integer (bilangan bulat)
+#● str(), mengubah integer atau data lain menjadi string (teks)
+#● float(), mengubah string atau integer menjadi float (bilangan desimal)
+#● bool(), mengubah data lain menjadi boolean (True/False)
+
 nama = input("Masukkan nama Anda: ")
 print("Hello", nama)
 
