@@ -21,3 +21,10 @@ print("x setelah *= 2: ", x)
 x /= 4
 # sama dengan x = x / 4
 print("x setelah /= 4: ", x)
+
+x %= 4
+# sama dengan x = x % 4
+print("x setelah %= 4: ", x)
+
+x += 3
+print ("x setelah += 3", x)
