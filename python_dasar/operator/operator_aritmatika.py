@@ -15,3 +15,11 @@ pembagian = a / b # 10 / 3 = 3.3333
 pembulatan = a // b # 10 / 3 = 3 (hasil tanpa desimal)
 sisa_bagi = a % b #sisa bagi dari 10 / 3 adalah 1
 pangkat = a ** b #10 pangkat 3 = 1000
+
+print(penjumlahan)
+print(pengurangan)
+print(perkalian)
+print(pembagian)
+print(pembulatan)
+print(sisa_bagi)
+print(pangkat)
