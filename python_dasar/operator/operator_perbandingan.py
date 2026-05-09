@@ -6,8 +6,8 @@ b = 2
 
 print(a > b) # lebih besar: true
 print(a < b) # lebih kecil: false
-print(a >= b) #lebih besar atau sama: true
-print(a <= b) #lebih kecil atau sama: false
+print(a >= b) #lebih besar atau sama: false
+print(a <= b) #lebih kecil atau sama: true
 print(a == b) #sama dengan: false
 print(a != b) #tidak sama dengan: true
 

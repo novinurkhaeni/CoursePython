@@ -18,3 +18,12 @@ kalimat = "Python adalah bahasa pemrograman"
 print("Python" in kalimat) #true
 print("Golang" in kalimat) #false
 print("adalah" in kalimat) #true
+
+# Berikan nilai pada variabel berikut
+nama_depan = 'Keisya'
+nama_belakang = 'Azizah'
+kelas = '11 Rpl 1'
+sekolah = "Smk Ma'arif 9 kebumen"
+
+# tampilkan gabungan dari semua variabel diatas
+print("nama " + nama_depan + " " + nama_belakang + ", kelas " + kelas + ", sekolah " + sekolah)

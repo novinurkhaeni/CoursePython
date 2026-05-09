@@ -16,3 +16,6 @@ print(hari == "Sabtu" or hari == "Minggu")
 
 aktif = True
 print(not aktif) # kebalikan true adalah false
+
+bulan = "Mei"
+print(bulan == "April" and bulan == "Juni")
