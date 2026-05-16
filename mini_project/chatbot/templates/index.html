@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatbot Tasia</title>
+
+    <!-- menghubungkan file css -->
+    <link rel="stylesheet" href="static/style.css">
+</head>
+<body>
+
+    <!-- container chatbot -->
+    <div class="chat-container">
+
+        <!-- judul -->
+        <h1>Auto Marsa Chatbot</h1>
+
+        <!-- area chat -->
+        <div id="chat-box">
+
+            <div class="bot-message">
+                Halo Siswa Marsa. Terima kasih telah menghubungi Auto Marsa.<br><br>
+                Perkenalkan nama saya Tasia. Ada yang bisa Tasia bantu?
+                <br><br>
+                ===== MENU INFORMASI =====<br>
+                1. Informasi Sekolah<br>
+                2. Daftar Jurusan<br>
+                3. Informasi Pendaftaran<br>
+                Ketik 'keluar' untuk mengakhiri chat.
+            </div>
+
+        </div>
+
+        <!-- input user -->
+        <div class="input-area">
+            <input type="text" id="user-input" placeholder="Ketik pesan...">
+            <button onclick="sendMessage()">Kirim</button>
+        </div>
+
+    </div>
+    <script>
+
+        async function sendMessage() {
+        
+            const input = document.getElementById("user-input");
+        
+            // AUTO LOWERCASE DI FRONTEND
+            const message = input.value.toLowerCase();
+        
+            if(message.trim() === "") return;
+        
+            const chatBox = document.getElementById("chat-box");
+        
+            chatBox.innerHTML += `<div class="user-message">${message}</div>`;
+        
+            const response = await fetch('/get_response', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({message: message})
+            });
+        
+            const data = await response.json();
+        
+            chatBox.innerHTML += `<div class="bot-message">${data.response}</div>`;
+        
+            chatBox.scrollTop = chatBox.scrollHeight;
+        
+            input.value = "";
+        }
+        
+        </script>
+</body>
+</html>

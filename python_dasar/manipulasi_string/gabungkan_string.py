@@ -13,3 +13,8 @@ umur = 25
 # cara yang benar
 pesan = "Nama saya " + nama + ", umur " + str(umur)
 print(pesan)
+
+x = 1
+while x <= 3:
+    print(x)
+    x += 1
