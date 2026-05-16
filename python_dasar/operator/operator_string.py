@@ -27,3 +27,4 @@ sekolah = "Smk Ma'arif 9 kebumen"
 
 # tampilkan gabungan dari semua variabel diatas
 print("nama " + nama_depan + " " + nama_belakang + ", kelas " + kelas + ", sekolah " + sekolah)
+print("Nama", nama_depan, nama_belakang + ",", kelas + ",", sekolah)
