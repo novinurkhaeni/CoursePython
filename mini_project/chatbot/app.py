@@ -64,30 +64,32 @@ Auto Marsa adalah sekolah berbasis teknologi dan kreativitas digital.
     elif user_message == '2' or user_message == 'daftar jurusan':
 
         response = '''
-Jurusan yang tersedia:
-
-1. TKR (Teknik Kendaraan Ringan)
-2. TSM (Teknik Sepeda Motor)
-3. AKL (Akuntansi dan Keuangan Lembaga)
-4. PPLG (Pengembangan Perangkat Lunak dan Gim)
+<b>Jurusan yang tersedia:</b>
+<br><br>
+1. TKR (Teknik Kendaraan Ringan)<br>
+2. TSM (Teknik Sepeda Motor)<br>
+3. AKL (Akuntansi dan Keuangan Lembaga)<br>
+4. PPLG (Pengembangan Perangkat Lunak dan Gim)<br>
 5. Kuliner
 '''
 
     # pilihan informasi pendaftaran
     elif user_message == '3' or user_message == 'informasi pendaftaran':
 
-        response = '''
+        response = """
 Pendaftaran dapat dilakukan secara online maupun langsung ke sekolah.
 
-Online:
-https://www.marsa9.com/berita/resmi-dibuka-ayo-bergabung-di-spmb-smk-ma-arif-9-kebumen-2026
+<br><br><b>Online:</b><br>
+<a href="https://www.marsa9.com/berita/resmi-dibuka-ayo-bergabung-di-spmb-smk-ma-arif-9-kebumen-2026" target="_blank">
+Klik untuk daftar online
+</a>
 
-Offline:
-Ruang TU SMK Ma'arif 9 Kebumen
-Jl. Raya, Klirong, Klegenwonosari,
-Kec. Klirong, Kabupaten Kebumen,
+<br><br><b>Offline:</b><br>
+Ruang TU SMK Ma'arif 9 Kebumen<br>
+Jl. Raya, Klirong, Klegenwonosari,<br>
+Kec. Klirong, Kabupaten Kebumen,<br>
 Jawa Tengah 54381
-'''
+"""
 
     else:
 
