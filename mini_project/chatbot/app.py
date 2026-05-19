@@ -11,12 +11,16 @@ from chatterbot.trainers import ListTrainer
 app = Flask(__name__)
 
 # membuat chatbot
-chatbot = ChatBot('MyChatBot')
+chatbot = ChatBot(
+    'MyChatBot',
+    storage_adapter='chatterbot.storage.SQLStorageAdapter',
+    database_uri='sqlite:///database.sqlite3'
+)
 
-# membuat trainer
+# trainer
 trainer = ListTrainer(chatbot)
 
-# melatih chatbot
+# training data
 trainer.train([
 
     'Hai',
@@ -46,26 +50,28 @@ trainer.train([
 def home():
     return render_template('index.html')
 
+
 # route chatbot
 @app.route('/get_response', methods=['POST'])
 def get_bot_response():
 
-    # mengambil pesan dari user
-    user_message = request.json['message'].lower()
+    user_message = request.json['message']
+    user_lower = user_message.lower()
 
-    # pilihan informasi sekolah
-    if user_message == '1' or user_message == 'informasi sekolah':
+    # =========================
+    # MENU MANUAL SYSTEM
+    # =========================
+
+    if user_message == '1' or user_lower == 'informasi sekolah':
 
         response = '''
 Auto Marsa adalah sekolah berbasis teknologi dan kreativitas digital.
 '''
 
-    # pilihan daftar jurusan
-    elif user_message == '2' or user_message == 'daftar jurusan':
+    elif user_message == '2' or user_lower == 'daftar jurusan':
 
         response = '''
-<b>Jurusan yang tersedia:</b>
-<br><br>
+<b>Jurusan yang tersedia:</b><br><br>
 1. TKR (Teknik Kendaraan Ringan)<br>
 2. TSM (Teknik Sepeda Motor)<br>
 3. AKL (Akuntansi dan Keuangan Lembaga)<br>
@@ -73,8 +79,7 @@ Auto Marsa adalah sekolah berbasis teknologi dan kreativitas digital.
 5. Kuliner
 '''
 
-    # pilihan informasi pendaftaran
-    elif user_message == '3' or user_message == 'informasi pendaftaran':
+    elif user_message == '3' or user_lower == 'informasi pendaftaran':
 
         response = """
 Pendaftaran dapat dilakukan secara online maupun langsung ke sekolah.
@@ -91,28 +96,43 @@ Kec. Klirong, Kabupaten Kebumen,<br>
 Jawa Tengah 54381
 """
 
+    # =========================
+    # FALLBACK AI CHATBOT
+    # =========================
+
     else:
 
-        # daftar input yang dikenali chatbot
-        known_inputs = [
-            'hai',
-            'halo!',
-            'apa kabar?',
-            'siapa nama kamu?',
-            'sampai jumpa!',
-            'keluar'
+        # 🔥 BLOCK KEYWORD SENSITIF / TIDAK ADA DI TRAINING
+        blocked_keywords = [
+            'biaya', 'harga', 'bayar', 'uang', 'pembayaran', 'cost', 'tarif'
         ]
 
-        # jika input dikenal
-        if user_message in known_inputs:
-            response = str(chatbot.get_response(user_message))
+        if any(word in user_lower for word in blocked_keywords):
 
-        # jika tidak dikenal
+            response = '''
+Mohon maaf untuk saat ini, info yang Marsa Family butuhkan dapat dibantu oleh teman Tasia. Apakah Marsa Family mau dihubungkan ke teman Tasia?
+'''
+
         else:
-            response = "Pesan tidak dimengerti."
 
-    # mengirim respon ke web
+            bot_response = chatbot.get_response(user_message)
+            confidence = bot_response.confidence
+
+            if confidence is None:
+                confidence = 0
+
+            # 🔥 threshold lebih ketat agar tidak salah jawab
+            if confidence < 0.5:
+
+                response = '''
+Mohon maaf untuk saat ini, info yang Marsa Family butuhkan dapat dibantu oleh teman Tasia. Apakah Marsa Family mau dihubungkan ke teman Tasia?
+'''
+
+            else:
+                response = str(bot_response)
+
     return jsonify({'response': response})
+
 
 # menjalankan aplikasi
 if __name__ == '__main__':
